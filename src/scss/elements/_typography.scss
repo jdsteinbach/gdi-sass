@@ -1,0 +1,32 @@
+body {
+  font-family: $font-body;
+  font-size: 20px;
+  line-height: 1.414;
+  background-color: $color-brown;
+  color: $color-off-white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 900;
+}
+
+strong,
+b {
+  font-style: 900px;
+}
+
+.disclaimer {
+  padding-top: 20px;
+  border-top: 1px solid $color-brown-lightest;
+  font-size: .75em;
+  font-style: italic;
+  text-align: center;
+}
+
+.page-title {
+  @include fs(3);
+}
+
+.ps-title {
+  @include fs(2);
+}

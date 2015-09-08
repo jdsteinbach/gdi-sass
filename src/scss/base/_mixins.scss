@@ -1,0 +1,39 @@
+@mixin fsmooth($on: true) {
+  @if $on == true {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: antialiased;
+  } @else {
+    -webkit-font-smoothing: initial;
+    -moz-osx-font-smoothing: initial;
+  }
+}
+
+@mixin light-text {
+  color: $color-off-white;
+  @include fsmooth;
+}
+
+@mixin bp($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin fs($scale) {
+  @each $key, $value in $typography {
+    $base-font-size: map-get($value, 'font-size');
+    $modular-scale: map-get($value, 'modular-scale');
+    $vertical-rhythm: map-get($value, 'vertical-rhythm');
+    @if map-get($value, 'breakpoint') == null {
+      $font-size: ( $base-font-size * power( $modular-scale, ($scale - 1) ) );
+      font-size: $font-size * 1px;
+      line-height: ceil( $font-size / $vertical-rhythm ) * ( $vertical-rhythm / $font-size );
+    } @else {
+      @include bp(map-get($value, breakpoint) + 120) {
+        $font-size: ( $base-font-size * power( $modular-scale, ($scale - 1) ) );
+        font-size: $font-size * 1px;
+        line-height: ceil( $font-size / $vertical-rhythm ) * ( $vertical-rhythm / $font-size );
+      }
+    }
+  }
+}

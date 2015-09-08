@@ -1,0 +1,37 @@
+$color-orange: #E28D38;
+$color-tan: #C58A54;
+$color-brown: #905745;
+$color-brown-light: #A28469;
+$color-brown-lightest: #A8998B;
+$color-off-white: mix(#fff, $color-tan, 90%);
+
+$font-body: Lato, lato, Verdana, sans-serif;
+$font-headings: Lobster, Playfair Display, playfair-display, script;
+
+$bp-medium: 600px;
+$bp-large: 960px;
+
+$base-font-size: 20;
+$vertical-rhythm: 32;
+$modular-scale: 1.414;
+
+$typography: (
+  default: (
+    breakpoint: null,
+    font-size: 16,
+    modular-scale: 1.2,
+    vertical-rhythm: 20
+  ),
+  medium: (
+    breakpoint: 600px,
+    font-size: 18,
+    modular-scale: 1.33,
+    vertical-rhythm: 25
+  ),
+  large: (
+    breakpoint: 960px,
+    font-size: 21,
+    modular-scale: 1.414,
+    vertical-rhythm: 32
+  )
+);

@@ -1,0 +1,30 @@
+{
+  "name": "gdi-sass",
+  "version": "1.0.0",
+  "description": "Webserver with Sass compiler for GDI (Denver/Boulder) Sass talks",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdsteinbach/gdi-sass.git"
+  },
+  "keywords": [
+    "Sass"
+  ],
+  "author": "James Steinbach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jdsteinbach/gdi-sass/issues"
+  },
+  "homepage": "https://github.com/jdsteinbach/gdi-sass#readme",
+  "dependencies": {
+    "glob": "^5.0.14",
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.9.2"
+  }
+}

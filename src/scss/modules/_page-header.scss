@@ -1,0 +1,41 @@
+.page-header {
+  position: relative;
+  padding: 0 20px;
+  background-color: $color-orange;
+  text-align: center;
+  box-shadow: 0 2px 3px -1px $color-brown;
+  z-index: 2;
+}
+
+.page-title {
+  max-width: 1180px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 20px 0;
+  font-family: $font-headings;
+  font-weight: normal;
+
+  a {
+    color: $color-off-white;
+    border: none;
+    @include fsmooth;
+    text-shadow: 2px 2px 0 $color-orange,
+      1px 1px 0 $color-orange,
+      1px 2px 0 $color-orange,
+      2px 1px 0 $color-orange,
+      0px 2px 0 $color-orange,
+      2px 0px 0 $color-orange,
+      4px 3px 0 $color-brown,
+      3px 4px 0 $color-brown,
+      4px 2px 0 $color-brown,
+      2px 4px 0 $color-brown,
+      4px 1px 0 $color-brown,
+      1px 4px 0 $color-brown;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: lighten($color-off-white, 5%);
+    }
+  }
+}

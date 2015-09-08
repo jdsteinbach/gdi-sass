@@ -1,0 +1,33 @@
+main {
+  max-width: 1180px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 20px;
+  background-color: $color-off-white;
+  color: $color-brown;
+  box-shadow: 0 2px 3px -1px darken($color-brown, 15%);
+}
+
+.ps-grid {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.ps-item {
+  padding-top: 62.5%;
+  margin: 0 10px 20px;
+
+  @include bp($bp-medium) {
+    display: inline-block;
+    vertical-align: top;
+    width: 48px;
+    width: calc(49% - 20px);
+    padding-top: (62.5% * .49);
+  }
+
+  @include bp($bp-large) {
+    width: 31%;
+    width: calc(32% - 20px);
+    padding-top: (62.5% * .31);
+  }
+}

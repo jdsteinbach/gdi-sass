@@ -1,0 +1,12 @@
+a {
+  text-decoration: none;
+  color: $color-orange;
+  border-bottom: 1px solid currentColor;
+  transition: color .25s;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($color-orange, 5%);
+  }
+}
