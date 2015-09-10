@@ -37,3 +37,17 @@
     }
   }
 }
+
+@mixin haf {
+  &:hover,
+  &:active,
+  &:focus {
+    @content;
+  }
+}
+
+@mixin item-hover {
+  .ps-item:hover & {
+    @content;
+  }
+}

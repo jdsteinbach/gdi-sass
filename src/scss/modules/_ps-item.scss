@@ -27,13 +27,10 @@
   padding: 10px 20px;
   bottom: auto;
   background-color: rgba($color-brown-light, .9);
-  transition: background .25s, opacity .25s, transform .25s ease-in-out;
+  transition: background-color $transition;
 
-  .ps-item:hover & {
+  @include item-hover {
     background-color: rgba($color-brown-light, 0);
-    // transition: opacity .25s, transform .5s ease-in-out;
-    // transform: translateY(-100%);
-    // opacity: 0;
   }
 }
 
@@ -41,9 +38,9 @@
   background-size: cover;
   background-position: center;
   z-index: 1;
-  transition: opacity .25s, transform .25s ease-in-out;
+  transition: opacity $transition, transform $transition ease-in-out;
 
-  .ps-item:hover & {
+  @include item-hover {
     transform: rotate(-4deg) scale(1.1);
     opacity: .1;
   }
@@ -53,9 +50,9 @@
   padding: 20px;
   top: auto;
   transform: translateY(100%);
-  transition: transform .25s ease-in-out;
+  transition: transform $transition ease-in-out;
 
-  .ps-item:hover & {
+  @include item-hover {
     transform: none;
   }
 }
