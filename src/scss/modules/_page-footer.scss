@@ -1,0 +1,17 @@
+.page-footer {
+  padding-top: 20px;
+  text-align: center;
+  @include light-text;
+
+  a {
+    color: mix($color-orange, $color-off-white);
+
+    @include haf {
+      color: darken(mix($color-orange, $color-off-white), 5%);
+    }
+  }
+}
+
+.disclaimer {
+  font-style: italic;
+}
