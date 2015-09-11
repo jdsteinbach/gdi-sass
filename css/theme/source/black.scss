@@ -1,0 +1,219 @@
+/**
+ * Black theme for reveal.js. This is the opposite of the 'white' theme.
+ *
+ * Copyright (C) 2015 Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+//@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+@import 'fonts';
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #222;
+
+$mainColor: #fdfdfd;
+$headingColor: #fdfdfd;
+
+$mainFontSize: 38px;
+$mainFont: Texta, Proxima Nova, Avenir Next, Avenir, Helvetica, sans-serif;
+$headingFont: $mainFont;
+$headingTextShadow: 1px 1px 1px rgba(black, .75);
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 700;
+$color-sass-hopbush: #c69;
+$color-sass-bouquet: #b37399;
+$color-sass-patina: #669999;
+$linkColor: lighten( $color-sass-hopbush, 15% );
+$linkColorHover: lighten( $linkColor, 10% );
+$selectionBackgroundColor: lighten( $linkColor, 20% );
+
+$heading1Size: 2.618em;
+$heading2Size: 2.618em;
+$heading3Size: 1.618em;
+$heading4Size: 1.0em;
+
+$blockMargin: $mainFontSize * .618;
+$headingMargin: 0 0 $blockMargin;
+
+section.has-light-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #222;
+	}
+}
+
+// Theme template ------------------------------
+@import "../template/theme";
+@import 'animations';
+
+// ---------------------------------------------
+
+.reveal {
+	font-weight: 300;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: antialiased;
+	text-shadow: .05em .05em .05em rgba(black, .75);
+
+	p {
+		max-width: 18em;
+		text-align: left;
+	}
+
+	ul {
+		width: 16.18em;
+	}
+
+	h4 {
+		text-align: left;
+		max-width: 18em;
+		margin-right: auto;
+		margin-bottom: 0;
+		margin-left: auto;
+
+		+ p {
+			margin-top: 0;
+		}
+	}
+
+	pre {
+		max-width: 32em;
+		border-radius: 5px;
+
+		> code {
+			padding: 16px 26px;
+			font-size: 120% !important;
+			text-shadow: 1px 1px 1px rgba(black, .75);
+			line-height: 1.4;
+			white-space: pre-wrap;
+		}
+	}
+
+	code {
+		font-family: Input Code, Source Code Pro, monospace !important;
+		font-size: 78%;
+		padding: 5px;
+		border-radius: 5px;
+		background-color: rgba( $linkColor, .1 );
+	}
+
+	h4 + pre {
+		margin-top: 0 !important;
+	}
+
+	.big-p {
+		font-size: $heading1Size;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		// font-style: italic;
+		text-shadow: $headingTextShadow;
+		font-weight: 300;
+		text-transform: lowercase;
+		font-variant: small-caps;
+
+		b {
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+	}
+
+	&:not(.overview) {
+		h1,
+		h2 {
+			position: relative;
+			font-style: italic;
+
+			&::before,
+			&::after {
+				content: '';
+				display: block;
+				width: 100vw;
+				height: 100vh;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translateX(-50%) translateY(-50%);
+				background-image: repeating-linear-gradient(
+					-60deg,
+					rgba($color-sass-hopbush, .65) 0,
+					rgba($color-sass-hopbush, .65) .25em,
+					rgba($color-sass-hopbush, .75) .25em,
+					rgba($color-sass-hopbush, .75) .5em);
+				z-index: -1;
+				opacity: 0;
+				transition: opacity .5s;
+			}
+
+			&::after {
+				background-image: linear-gradient(
+					180deg,
+					$color-sass-hopbush 0%,
+					$color-sass-hopbush 10%,
+					rgba($color-sass-hopbush, 0) 45%,
+					rgba($color-sass-hopbush, 0) 50%,
+					rgba($color-sass-hopbush, 0) 55%,
+					$color-sass-hopbush 90%,
+					$color-sass-hopbush 100%);
+			}
+
+			small {
+				position: relative;
+				display: block;
+				margin: -.5em 0;
+				font-weight: 300;
+				opacity: .75;
+			}
+		}
+
+		h2:not(.code-title) {
+			&::before,
+			&::after {
+				height: auto;
+				top: -.5em;
+				bottom: -.5em;
+				transform-origin: left center;
+				transform: translateX(-50%);
+			}
+			&::after {
+				background-image: linear-gradient(
+					180deg,
+					$color-sass-hopbush 0%,
+					rgba($color-sass-hopbush, 0) 50%,
+					$color-sass-hopbush 100%);
+			}
+		}
+		h2.code-title {
+			&::after {
+				background-image: linear-gradient(
+					180deg,
+					$color-sass-hopbush 0%,
+					rgba($color-sass-hopbush, 0) 50%,
+					$color-sass-hopbush 100%),
+					url(../images/clock.svg);
+				background-size: 100%, 50% 50%;
+				background-position: center, center center;
+				background-repeat: repeat-y, no-repeat;
+			}
+		}
+
+		.present {
+			> h1,
+			> h2 {
+				&::before,
+				&::after {
+					transition-delay: .75s;
+					opacity: 1;
+				}
+			}
+		}
+	}
+}

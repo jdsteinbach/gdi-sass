@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>From Zero to Sassy in 2 Sessions</title>
+
+    <meta name="description" content="Getting started with Sass">
+    <meta name="author" content="James Steinbach">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+      <link rel="stylesheet" href="css/reveal.css">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <div class="slides">
+<section>
+<h1 id="from-b-zero-b-to-b-sassy-b-br-in-b-2-sessions-b-hellip-">From <b>Zero</b> to <b>Sassy</b><br> in <b>2 Sessions</b>&hellip;</h1>
+
+</section>
+
+<section>
+
+<section>
+
+<h2 id="installing-small-amp-small-compiling">Installing <small>&amp;</small> Compiling</h2>
+
+</section>
+
+<section>
+
+<h3 id="node-sass">Node-sass</h3>
+<p>Used to have fewer features (not anymore!)</p>
+<p>Much faster than Ruby Sass</p>
+<p>Task runner integration:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/node-sass">node-sass</a></li>
+<li><a href="https://www.npmjs.com/package/gulp-sass">gulp-sass</a></li>
+<li><a href="https://www.npmjs.com/package/grunt-sass">grunt-sass</a></li>
+</ul>
+
+</section>
+
+<section>
+
+<h3 id="ruby-sass">Ruby Sass</h3>
+<p>Standalone Ruby gem: <a href="https://rubygems.org/gems/sass/versions/3.4.18">sass</a></p>
+<h4 id="install">Install</h4>
+<pre><code class="lang-sh">gem install sass
+</code></pre>
+<h4 id="compile">Compile</h4>
+<pre><code>sass input.scss:output.css
+</code></pre><p>Task runner integration:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/gulp-ruby-sass">gulp-ruby-sass</a></li>
+<li><a href="https://www.npmjs.com/package/grunt-contrib-scss">grunt-contrib-sass</a></li>
+</ul>
+
+</section>
+
+</section>
+
+<section>
+
+<section>
+
+<h2 id="file-organization">File Organization</h2>
+
+</section>
+
+<section>
+
+<h3 id="partials">Partials</h3>
+<p>Break your giant CSS file into smaller, modular partials.</p>
+<p>Prefix your partials&#8217; filenames with <code>_</code>.</p>
+<pre><code>/scss
+| – /base
+     | – _variables.scss
+     | – _functions.scss
+| – /modules
+     | – _header.scss
+     | – _footer.scss
+| – style.scss
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="partials">Partials</h3>
+<p>Call your partials from your primary Sass file.</p>
+<pre><code>@import &#39;base/variables&#39;;
+@import &#39;base/functions&#39;;
+
+@import &#39;modules/header&#39;;
+@import &#39;modules/footer&#39;;
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="nesting">Nesting</h3>
+<p>Nesting selectors automatically creates compound selectors</p>
+<pre><code>.page-header {
+  // styles
+
+  h1 {
+    // styles
+  }
+
+  a {
+    // styles
+  }
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="nesting">Nesting</h3>
+<pre><code>.page-header {
+  // styles
+}
+
+.page-header h1 {
+  // styles
+}
+
+.page-header a {
+  // styles
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="reverse-nesting">Reverse Nesting</h3>
+<p>Use <code>&amp;</code> to &#8220;move&#8221; the current selector context</p>
+<pre><code>.page-header {
+  .media-page &amp; {
+    // styles
+  }
+}
+
+.media-page .page-header {
+  // styles
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="chained-nesting">Chained Nesting</h3>
+<pre><code>a {
+  &amp;:hover,
+  &amp;:active,
+  &amp;:focus {
+    // styles
+  }
+}
+
+a:hover, a:active, a:focus {
+  // styles
+}
+</code></pre>
+</section>
+
+</section>
+
+<section>
+
+<h2 class="code-title">Code Time!</h2>
+
+
+</section>
+
+<section>
+
+<section>
+
+<h2 id="variables">Variables</h2>
+
+</section>
+
+<section>
+
+<h3 id="simple-variables">Simple Variables</h3>
+<p>Data types include <code>string</code>, <code>color</code>, <code>number</code>, <code>boolean</code>, <code>null</code></p>
+<pre><code>$color-blue: #003366;
+
+.blue-element {
+  color: $color-blue;
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="lists">Lists</h3>
+<p>Comma- or space-separated lists</p>
+<p>Optional parenthesis wrappers</p>
+<pre><code>$font-sizes: small, p, pull-quote, subheading, heading, hero;
+
+$ff-sans: Proxima Nova, proxima-nova, Verdana, sans-serif;
+
+$box-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="maps">Maps</h3>
+<p>Array/object: key-value pairs</p>
+<pre><code>$social-media: (
+  facebook: #3b5998,
+  twitter: #00aced,
+  google-plus: #dd4b39,
+  linkedin: #007bb6
+);
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="flags-scope">Flags / Scope</h3>
+<p>Similar to <code>!important</code> in CSS, Sass has flags to tell the compiler how overrideable a variable&#8217;s value is.</p>
+<p>Normally, variables follow the cascade: if you reassign a variable&#8217;s value, any following uses of that variable will have the new value.</p>
+
+</section>
+
+<section>
+
+<h3 id="flags-scope">Flags / Scope</h3>
+<h4 id="default">Default</h4>
+<p>It doesn&#8217;t matter where you redefine this variable (earlier or later), a <code>!default</code> will always give way to any other value assignment.</p>
+<pre><code>$column-count: 12 !default;
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="flags-scope">Flags / Scope</h3>
+<h4 id="global">Global</h4>
+<p>Variables within functions are scoped: use <code>!global</code> to override an external variable from within a function.</p>
+<pre><code>@function change-size($percentage) {
+  $size: $size * percentage !global;
+  @return $size;
+}
+</code></pre>
+</section>
+
+</section>
+
+<section>
+
+<h2 class="code-title">Code Time!</h2>
+
+
+</section>
+
+<section>
+
+<section>
+
+<h2 id="logic">Logic</h2>
+
+</section>
+
+<section>
+
+<h3 id="if-conditions">If conditions</h3>
+<pre><code>@if lightness($bg-color) &gt; 50% {
+  color: $color-gray-dark;
+} @else {
+  color: $color-cream;
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="each-loops">Each Loops</h3>
+<h4 id="with-lists">With Lists</h4>
+<pre><code>$i: 1;
+@each $size in $font-sizes {
+  .fs-#{$size} {
+    $scale: power($interval, $i);
+    font-size: $base * $scale;
+  }
+  $i: $i + 1;
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="each-loops">Each Loops</h3>
+<h4 id="with-maps">With Maps</h4>
+<pre><code>@each $name, $color in $social-media {
+  .sm-link[href*=&quot;#{$name}&quot;] {
+    background-color: $color;
+  }
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="for-loops">For Loops</h3>
+<p><code>to</code> stops before the final number</p>
+<pre><code>@for $i from 1 to 5 {
+  li:nth-child(#{$i}) {
+    &amp;::before {
+      content: &#39;#{$i}&#39;;
+    }
+  }
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="for-loops">For Loops</h3>
+<p><code>through</code> includes the final number</p>
+<pre><code>@for $i from 1 through 5 {
+  li:nth-child(#{$i}) {
+    &amp;::before {
+      content: &#39;#{$i}&#39;;
+    }
+  }
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="while-loops">While Loops</h3>
+<pre><code>@while $line-height &lt; $vertical-rhythm {
+  $line-height: $line-height * 2;
+}
+</code></pre>
+</section>
+
+</section>
+
+<section>
+
+<section>
+
+<h2 id="functions">Functions</h2>
+
+</section>
+
+<section>
+
+<h3 id="built-in-functions">Built-in Functions</h3>
+<p>Manipulate input and return a value</p>
+<p>Use them in the value side of a property declaration</p>
+
+</section>
+
+<section>
+
+<h3 id="colors">Colors</h3>
+<ul>
+<li><code>darken($blue, 5%)</code></li>
+<li><code>lighten($blue, 7.5%)</code></li>
+<li><code>mix($blue, $shadow, 40%)</code></li>
+<li><code>rgba($blue, .5)</code></li>
+</ul>
+
+</section>
+
+<section>
+
+<h3 id="colors">Colors</h3>
+<h4 id="sass-input">Sass Input</h4>
+<pre><code>$blue: #003366;
+$shadow: #000102;
+$blue-shadow: mix($blue, $shadow, 40%);
+
+.button-blue {
+  background-color: $blue;
+  border: 2px solid darken($blue, 5%);
+  box-shadow: 0 2px 2px rgba($blue-shadow, .85);
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="colors">Colors</h3>
+<h4 id="css-output">CSS Output</h4>
+<pre><code>.button-blue {
+  background-color: #003366;
+  border: 2px solid #00264d;
+  box-shadow: 0 2px 2px rgba(0, 21, 42, 0.85);
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="strings">Strings</h3>
+<ul>
+<li><code>str-length($string)</code></li>
+<li><code>str-index($string, $substring)</code></li>
+<li><code>str-slice($string, $start, [$end])</code></li>
+</ul>
+
+</section>
+
+<section>
+
+<h3 id="math">Math</h3>
+<ul>
+<li><code>percentage($number)</code></li>
+<li><code>round($number)</code></li>
+<li><code>random([$limit])</code></li>
+</ul>
+
+</section>
+
+<section>
+
+<h3 id="lists">Lists</h3>
+<ul>
+<li><code>length($list)</code></li>
+<li><code>nth($list, $number)</code></li>
+<li><code>join($list1, $list2)</code></li>
+<li><code>append($list, $item)</code></li>
+<li><code>index($list, $value)</code></li>
+</ul>
+
+</section>
+
+<section>
+
+<h3 id="maps">Maps</h3>
+<ul>
+<li><code>map-get($map, $key)</code></li>
+<li><code>map-remove($map, $keys…)</code></li>
+<li><code>map-keys($map)</code></li>
+<li><code>map-values($map)</code></li>
+<li><code>map-has-key($key)</code></li>
+<li><code>map-merge($map1, $map1)</code></li>
+</ul>
+
+</section>
+
+<section>
+
+<h3 id="maps">Maps</h3>
+<pre><code>$social-media: (
+  facebook: #3b5998,
+  twitter: #00aced,
+  google-plus: #dd4b39,
+  linkedin: #007bb6
+);
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="maps">Maps</h3>
+<pre><code>.facebook {
+  color: map-get($social-media, &#39;facebook&#39;);
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="maps">Maps</h3>
+<pre><code>$more-social-media: (
+  amazon: #ff9900,
+  instagram: #3f729b
+);
+
+$social-media: map-merge(
+  $social-media,
+  $more-social-media
+);
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="custom-functions">Custom Functions</h3>
+<pre><code>$colors: ( … );
+
+@function get-color($color) {
+  @if map-has-key($colors, $color) {
+    @return map-get($colors, $color);
+  }
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="custom-functions">Custom Functions</h3>
+<pre><code>@function power($x, $n) {
+  $return: 1;
+  @if $n &gt; 0 {
+    @for $i from 1 through $n {
+      $return: $return * $x;
+    }
+  } @else if $n &lt; 0 {
+    @for $i from $n to 0 {
+      $return: $return / $x;
+    }
+  }
+  @return $return;
+}
+</code></pre>
+</section>
+
+</section>
+
+<section>
+
+<h2 class="code-title">Code Time!</h2>
+
+
+</section>
+
+<section>
+
+<section>
+
+<h2 id="language-constructs">Language Constructs</h2>
+
+</section>
+
+<section>
+
+<h3 id="mixins">Mixins</h3>
+<p>Accepts zero or more arguments and outputs desired result</p>
+
+</section>
+
+<section>
+
+<h3 id="mixins-no-arguments">Mixins: No Arguments</h3>
+<pre><code>@mixin clearfix {
+  &amp;::after {
+    clear: both;
+    content: &quot;&quot;;
+    display: table;
+  }
+}
+
+.content {
+  @include clearfix;
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="mixins-arguments">Mixins: Arguments</h3>
+<pre><code>@mixin button($color: $color-blue) {
+  background-color: $color;
+  border: 2px solid darken($color, 5%);
+}
+
+.button {
+  @include button;
+}
+.button.red {
+  @include button($color-red);
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="mixins-content-no-arguments">Mixins: Content, No Arguments</h3>
+<pre><code>@mixin no-flex {
+  .no-flexbox &amp; {
+    @content;
+  }
+}
+.flex-div {
+  display: flex;
+  @include no-flex {
+    display: table;
+  }
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="mixins-content-arguments">Mixins: Content, Arguments</h3>
+<pre><code>@mixin mq($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+body {
+  @include mq(900px) {
+    font-size: 1.2em;
+  }
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="extends">Extends</h3>
+<p>Adds a selector to a previous selector&#8217;s declaration block</p>
+<pre><code>.card {
+  padding: 15px 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 2px -1px #222;
+}
+
+.image-card {
+  @extend .card;
+  border-color: #cc4;
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="extends">Extends</h3>
+<pre><code>.card, .image-card {
+  padding: 15px 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 2px -1px #222;
+}
+
+.image-card {
+  border-color: #cc4;
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="placeholders">Placeholders</h3>
+<p><code>%selector</code> creates a &#8220;silent&#8221; declaration block that won&#8217;t be compiled unless a real selector extends it.</p>
+<pre><code>%card { … }
+
+.image-card {
+  @extend %card;
+  border-color: #cc4;
+}
+
+.search-card {
+  @extend %card;
+}
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="directives">Directives</h3>
+<h4 id="error">Error</h4>
+<p>Stops the compiler with a fatal error</p>
+<pre><code>@error &#39;Sorry, this is what went wrong: [message]&#39;;
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="directives">Directives</h3>
+<h4 id="warn">Warn</h4>
+<p>Allows the compiler to continue, but sends a warning message to the developer&#8217;s console</p>
+<pre><code>@warn &#39;The `border-radius()` mixin will be deprecated in version 2.0.&#39;;
+</code></pre>
+</section>
+
+<section>
+
+<h3 id="directives">Directives</h3>
+<h4 id="debug">Debug</h4>
+<p>Sends any message to the console: useful for debugging your own work</p>
+<pre><code>@debug $math-value;
+</code></pre>
+</section>
+
+</section>
+
+<section>
+
+<h2 class="code-title">Code Time!</h2>
+
+
+</section>
+
+<section>
+
+<section>
+
+<h2 id="libraries">Libraries</h2>
+
+</section>
+
+<section>
+
+<h3 id="extra-mixins-functions">Extra Mixins / Functions</h3>
+<h4 id="bourbon">Bourbon</h4>
+<p><a href="http://bourbon.io">bourbon.io</a></p>
+
+</section>
+
+<section>
+
+<h3 id="grids">Grids</h3>
+<h4 id="susy">Susy</h4>
+<p><a href="http://susy.oddbird.net/">susy.oddbird.net</a></p>
+<h4 id="singularity">Singularity</h4>
+<p><a href="http://singularity.gs">singularity.gs</a></p>
+<h4 id="neat">Neat</h4>
+<p><a href="http://neat.bourbon.io/">neat.bourbon.io</a></p>
+
+</section>
+
+<section>
+
+<h3 id="typography">Typography</h3>
+<h4 id="typetuner">TypeTuner</h4>
+<p><a href="http://typetuner.com">typetuner.com</a></p>
+<h4 id="modular-scale">Modular Scale</h4>
+<p><a href="http://www.modularscale.com/">modularscale.com</a></p>
+<h4 id="sassline">Sassline</h4>
+<p><a href="https://sassline.com/">sassline.com</a></p>
+
+</section>
+
+</section>
+</div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+      <script src="js/reveal.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        width: 960,
+
+        transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/zoom-js/zoom.js', async: true }
+        ]
+
+      });
+
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-43397146-5', 'auto'); ga('send', 'pageview');
+    </script>
+
+  </body>
+</html>
