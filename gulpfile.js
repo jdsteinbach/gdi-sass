@@ -2,12 +2,12 @@
   'use strict';
 
   /* Required packages */
-  var gulp       = require('gulp');
-  var glob       = require('glob');
-  var browserSync     = require('browser-sync');
-  var reload     = browserSync.reload;
-  var sass       = require('gulp-sass');
-  var sourcemaps = require('gulp-sourcemaps');
+  var gulp        = require('gulp');
+  var glob        = require('glob');
+  var browserSync = require('browser-sync');
+  var reload      = browserSync.reload;
+  var sass        = require('gulp-sass');
+  var sourcemaps  = require('gulp-sourcemaps');
 
   /* Environment variables */
   var _src_dir  = 'src/';
